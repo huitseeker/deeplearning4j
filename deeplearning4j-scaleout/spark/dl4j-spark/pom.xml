@@ -25,6 +25,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>dl4j-spark_2.11</artifactId>
+    <version>0.7.3_spark_${spark.major.version}-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>dl4j-spark</name>
@@ -33,28 +34,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <hadoop.version>1.0.4</hadoop.version>
-        <spark.version>1.6.2</spark.version>
     </properties>
-
-    <profiles>
-        <profile>
-            <id>cdh5</id>
-            <repositories>
-                <repository>
-                    <id>org.apache.hadoop</id>
-                    <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-                </repository>
-            </repositories>
-            <properties>
-                <hadoop.version>2.0.0-cdh4.6.0</hadoop.version>
-                <spark.version>1.2.0-cdh5.3.0</spark.version>
-            </properties>
-        </profile>
-    </profiles>
-
-
-
 
     <pluginRepositories>
         <pluginRepository>
@@ -63,7 +43,6 @@
             <url>http://scala-tools.org/repo-releases</url>
         </pluginRepository>
     </pluginRepositories>
-
 
     <dependencies>
 
@@ -102,7 +81,7 @@
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-ui-components</artifactId>
-            <version>${project.version}</version>
+            <version>${parent.version}</version>
         </dependency>
 
         <!-- Test Dependencies -->
@@ -121,7 +100,7 @@
         <dependency>
             <groupId>org.deeplearning4j</groupId>
             <artifactId>deeplearning4j-play_2.11</artifactId>
-            <version>${project.version}</version>
+            <version>${parent.version}</version>
             <scope>test</scope>
         </dependency>
 
