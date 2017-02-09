@@ -21,21 +21,21 @@ package org.deeplearning4j.datasets.loader;
 /**
  * @author Adam Gibson
  */
-// public class ReutersNewsGroupsLoader extends BaseDataFetcher {
+// public class TwentyNewsGroupsLoader extends BaseDataFetcher {
 
 //     private TextVectorizer textVectorizer;
 //     private boolean tfidf;
 //     public final static String NEWSGROUP_URL = "http://qwone.com/~jason/20Newsgroups/20news-18828.tar.gz";
-//     private File reutersRootDir;
-//     private static final Logger log = LoggerFactory.getLogger(ReutersNewsGroupsLoader.class);
+//     private File twentyRootDir;
+//     private static final Logger log = LoggerFactory.getLogger(TwentyNewsGroupsLoader.class);
 //     private DataSet load;
 
 
-//     public ReutersNewsGroupsLoader(boolean tfidf) throws Exception {
+//     public TwentyNewsGroupsLoader(boolean tfidf) throws Exception {
 //         getIfNotExists();
-//         LabelAwareSentenceIterator iter = new LabelAwareFileSentenceIterator(reutersRootDir);
+//         LabelAwareSentenceIterator iter = new LabelAwareFileSentenceIterator(twentyRootDir);
 //         List<String> labels =new ArrayList<>();
-//         for(File f : reutersRootDir.listFiles()) {
+//         for(File f : twentyRootDir.listFiles()) {
 //             if(f.isDirectory())
 //                 labels.add(f.getName());
 //         }
@@ -54,25 +54,25 @@ package org.deeplearning4j.datasets.loader;
 
 //     private void getIfNotExists() throws Exception {
 //         String home = System.getProperty("user.home");
-//         String rootDir = home + File.separator + "reuters";
-//         reutersRootDir = new File(rootDir);
-//         if(!reutersRootDir.exists())
-//             reutersRootDir.mkdir();
-//         else if(reutersRootDir.exists())
+//         String rootDir = home + File.separator + "twenty";
+//         twentyRootDir = new File(rootDir);
+//         if(!twentyRootDir.exists())
+//             twentyRootDir.mkdir();
+//         else if(twentyRootDir.exists())
 //             return;
 
 
-//         File rootTarFile = new File(reutersRootDir,"20news-18828.tar.gz");
+//         File rootTarFile = new File(twentyRootDir,"20news-18828.tar.gz");
 //         if(rootTarFile.exists())
 //             rootTarFile.delete();
 //         rootTarFile.createNewFile();
 
 //         FileUtils.copyURLToFile(new URL(NEWSGROUP_URL), rootTarFile);
-//         ArchiveUtils.unzipFileTo(rootTarFile.getAbsolutePath(), reutersRootDir.getAbsolutePath());
+//         ArchiveUtils.unzipFileTo(rootTarFile.getAbsolutePath(), twentyRootDir.getAbsolutePath());
 //         rootTarFile.delete();
-//         FileUtils.copyDirectory(new File(reutersRootDir,"20news-18828"),reutersRootDir);
-//         FileUtils.deleteDirectory(new File(reutersRootDir,"20news-18828"));
-//         if(reutersRootDir.listFiles() == null)
+//         FileUtils.copyDirectory(new File(twentyRootDir,"20news-18828"),twentyRootDir);
+//         FileUtils.deleteDirectory(new File(twentyRootDir,"20news-18828"));
+//         if(twentyRootDir.listFiles() == null)
 //             throw new IllegalStateException("No files found!");
 
 //     }
