@@ -69,7 +69,7 @@ public class ScoreExamplesFunction implements DoubleFlatMapFunction<Iterator<Dat
         network.init();
         INDArray val = params.value().unsafeDuplication();
         if (val.length() != network.numParams(false))
-            throw new IllegalStateException("Network did not have same number of parameters as the broadcasted set parameters");
+            throw new IllegalStateException("Network did not have same number of parameters as the broadcast set parameters");
         network.setParameters(val);
 
         List<Double> ret = new ArrayList<>();

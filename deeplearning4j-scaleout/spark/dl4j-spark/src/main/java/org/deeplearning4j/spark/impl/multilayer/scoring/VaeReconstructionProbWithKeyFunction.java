@@ -36,7 +36,7 @@ public class VaeReconstructionProbWithKeyFunction<K> extends BaseVaeReconstructi
         network.init();
         INDArray val = ((INDArray)params.value()).unsafeDuplication();
         if (val.length() != network.numParams(false))
-            throw new IllegalStateException("Network did not have same number of parameters as the broadcasted set parameters");
+            throw new IllegalStateException("Network did not have same number of parameters as the broadcast set parameters");
         network.setParameters(val);
 
         Layer l = network.getLayer(0);
