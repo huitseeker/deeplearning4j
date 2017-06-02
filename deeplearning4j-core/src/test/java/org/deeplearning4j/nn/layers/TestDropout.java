@@ -89,8 +89,8 @@ public class TestDropout {
             double score1 = net.score(new DataSet(in2, out2), false);
             double score2 = net.score(new DataSet(in2, out2), false);
             double score3 = net.score(new DataSet(in2, out2), false);
-            assertEquals(score1, score2, 0.0);
-            assertEquals(score1, score3, 0.0);
+            assertEquals(score1, score2, 1.0e-12);
+            assertEquals(score1, score3, 1.0e-12);
         }
 
         if (noDropoutCount >= nTests / 3) {
