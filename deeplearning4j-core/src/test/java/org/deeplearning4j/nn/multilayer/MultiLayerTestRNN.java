@@ -1,6 +1,6 @@
 package org.deeplearning4j.nn.multilayer;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.datasets.iterator.ExistingDataSetIterator;
 import org.deeplearning4j.nn.api.Layer;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;

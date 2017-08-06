@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.spark.api.java.JavaRDD;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.models.embeddings.WeightLookupTable;
 import org.deeplearning4j.models.embeddings.inmemory.InMemoryLookupTable;
 import org.deeplearning4j.models.embeddings.loader.WordVectorSerializer;

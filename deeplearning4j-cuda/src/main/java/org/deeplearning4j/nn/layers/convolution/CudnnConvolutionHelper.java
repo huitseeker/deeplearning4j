@@ -19,7 +19,7 @@ package org.deeplearning4j.nn.layers.convolution;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bytedeco.javacpp.*;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.nn.conf.ConvolutionMode;
 import org.deeplearning4j.nn.conf.layers.ConvolutionLayer.AlgoMode;
 import org.deeplearning4j.nn.conf.layers.ConvolutionLayer.BwdFilterAlgo;

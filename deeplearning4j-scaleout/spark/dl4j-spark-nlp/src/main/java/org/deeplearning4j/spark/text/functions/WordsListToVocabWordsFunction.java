@@ -2,7 +2,7 @@ package org.deeplearning4j.spark.text.functions;
 
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.broadcast.Broadcast;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.models.word2vec.VocabWord;
 import org.deeplearning4j.models.word2vec.wordstore.VocabCache;
 
@@ -40,4 +40,3 @@ public class WordsListToVocabWordsFunction implements Function<Pair<List<String>
         return vocabWordsList;
     }
 }
-

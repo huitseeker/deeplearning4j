@@ -2,7 +2,7 @@ package org.deeplearning4j.eval;
 
 import lombok.*;
 import org.apache.commons.lang3.ArrayUtils;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.eval.curves.PrecisionRecallCurve;
 import org.deeplearning4j.eval.curves.RocCurve;
 import org.deeplearning4j.eval.serde.ROCSerializer;
@@ -341,10 +341,10 @@ public class ROC extends BaseEvaluation<ROC> {
             /*
             Sort descending. As we iterate: decrease probability threshold T... all values <= T are predicted
             as class 0, all others are predicted as class 1
-            
+
             Precision:  sum(TP) / sum(predicted pos at threshold)
             Recall:     sum(TP) / total actual positives
-            
+
             predicted positive at threshold: # values <= threshold, i.e., just i
              */
 

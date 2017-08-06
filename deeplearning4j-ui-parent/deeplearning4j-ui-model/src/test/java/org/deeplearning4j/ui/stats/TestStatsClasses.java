@@ -1,6 +1,6 @@
 package org.deeplearning4j.ui.stats;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.ui.stats.api.*;
 import org.deeplearning4j.ui.stats.impl.SbeStatsInitializationReport;
 import org.deeplearning4j.ui.stats.impl.SbeStatsReport;

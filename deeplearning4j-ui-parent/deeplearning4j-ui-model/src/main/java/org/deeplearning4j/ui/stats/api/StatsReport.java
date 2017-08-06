@@ -1,6 +1,6 @@
 package org.deeplearning4j.ui.stats.api;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.ui.stats.StatsListener;
 import org.deeplearning4j.api.storage.Persistable;
 

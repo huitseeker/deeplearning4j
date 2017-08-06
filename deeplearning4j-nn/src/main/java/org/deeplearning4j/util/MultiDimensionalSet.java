@@ -18,7 +18,7 @@
 
 package org.deeplearning4j.util;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;

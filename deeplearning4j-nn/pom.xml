@@ -60,6 +60,13 @@
             <artifactId>logback-classic</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+          <groupId>edu.berkeley.nlp</groupId>
+          <artifactId>berkeleyparser</artifactId>
+          <version>r32</version>
+        </dependency>
+
     </dependencies>
 
     <profiles>

@@ -21,7 +21,7 @@ package org.deeplearning4j.models.paragraphvectors;
 
 import lombok.NonNull;
 import org.datavec.api.util.ClassPathResource;
-import org.deeplearning4j.berkeley.Iterators;
+import edu.berkeley.nlp.util.Iterators;
 import org.deeplearning4j.models.embeddings.inmemory.InMemoryLookupTable;
 import org.deeplearning4j.models.embeddings.learning.impl.elements.CBOW;
 import org.deeplearning4j.models.embeddings.learning.impl.elements.SkipGram;
@@ -83,25 +83,25 @@ public class ParagraphVectorsTest {
         ClassPathResource resource = new ClassPathResource("/big/raw_sentences.txt");
         File file = resource.getFile().getParentFile();
         LabelAwareSentenceIterator iter = LabelAwareUimaSentenceIterator.createWithPath(file.getAbsolutePath());
-    
-    
+
+
         TokenizerFactory t = new UimaTokenizerFactory();
-    
-    
+
+
         ParagraphVectors vec = new ParagraphVectors.Builder()
                 .minWordFrequency(1).iterations(5).labels(Arrays.asList("label1", "deeple"))
                 .layerSize(100)
                 .stopWords(new ArrayList<String>())
                 .windowSize(5).iterate(iter).tokenizerFactory(t).build();
-    
+
         assertEquals(new ArrayList<String>(), vec.getStopWords());
-    
-    
+
+
         vec.fit();
         double sim = vec.similarity("day","night");
         log.info("day/night similarity: " + sim);
         new File("cache.ser").delete();
-    
+
     }
     */
 
@@ -701,15 +701,15 @@ public class ParagraphVectorsTest {
         VocabCache<VocabWord> cacheW = wordVectors.getVocab();
         for (int x = 0; x < 1000; x++) {
             int idx = rnd.nextInt(cacheW.numWords());
-        
+
             String wordW = cacheW.wordAtIndex(idx);
             String wordP = cacheP.wordAtIndex(idx);
-        
+
             assertEquals(wordW, wordP);
-        
+
             INDArray arrayW = wordVectors.getWordVectorMatrix(wordW);
             INDArray arrayP = paragraphVectors.getWordVectorMatrix(wordP);
-        
+
             double simWP = Transforms.cosineSim(arrayW, arrayP);
             assertTrue(simWP >= 0.9);
         }

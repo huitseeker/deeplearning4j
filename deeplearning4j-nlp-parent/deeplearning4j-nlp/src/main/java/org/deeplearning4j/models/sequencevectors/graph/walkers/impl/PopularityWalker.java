@@ -6,7 +6,7 @@ import lombok.NonNull;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.math3.util.MathArrays;
-import org.deeplearning4j.berkeley.PriorityQueue;
+import edu.berkeley.nlp.util.PriorityQueue;
 import org.deeplearning4j.models.sequencevectors.graph.enums.NoEdgeHandling;
 import org.deeplearning4j.models.sequencevectors.graph.enums.PopularityMode;
 import org.deeplearning4j.models.sequencevectors.graph.enums.SpreadSpectrum;

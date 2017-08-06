@@ -18,7 +18,7 @@
 
 package org.deeplearning4j.optimize.api;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.nn.api.Model;
 import org.deeplearning4j.nn.api.Updater;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;

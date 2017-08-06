@@ -1,7 +1,7 @@
 package org.deeplearning4j.models.glove;
 
 import lombok.NonNull;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.models.glove.count.*;
 import org.deeplearning4j.models.sequencevectors.interfaces.SequenceIterator;
 import org.deeplearning4j.models.sequencevectors.iterators.FilteredSequenceIterator;
@@ -435,7 +435,7 @@ public class AbstractCoOccurrences<T extends SequenceElement> implements Seriali
                     try {
                         /*
                                commented and left here for future debugging purposes, if needed
-                        
+
                                 //lock.readLock().lock();
                                 //int size = coOccurrenceCounts.size();
                                 //lock.readLock().unlock();
@@ -551,25 +551,25 @@ public class AbstractCoOccurrences<T extends SequenceElement> implements Seriali
                 SentenceIterator sIterator =  new PrefetchingSentenceIterator.Builder(new BasicLineIterator(tempFiles[counter.get()]))
                         .setFetchSize(500000)
                         .build();
-                
-                
+
+
                 int linesRead = 0;
                 while (sIterator.hasNext()) {
                     //List<Writable> list = new ArrayList<>(reader.next());
                     String sentence = sIterator.nextSentence();
                     if (sentence == null || sentence.isEmpty()) continue;
                     String[] strings = sentence.split(" ");
-                
-                
+
+
                     // first two elements are integers - vocab indexes
                     //T element1 = vocabCache.wordFor(vocabCache.wordAtIndex(list.get(0).toInt()));
                     //T element2 = vocabCache.wordFor(vocabCache.wordAtIndex(list.get(1).toInt()));
                     T element1 = vocabCache.elementAtIndex(Integer.valueOf(strings[0]));
                     T element2 = vocabCache.elementAtIndex(Integer.valueOf(strings[1]));
-                
+
                     // getting third element, previously stored weight
                     double sWeight = Double.valueOf(strings[2]);  // list.get(2).toDouble();
-                
+
                     // now, since we have both elements ready, we can check this pair against inmemory map
                         double mWeight = localMap.getCount(element1, element2);
                         if (mWeight <= 0) {
@@ -577,39 +577,39 @@ public class AbstractCoOccurrences<T extends SequenceElement> implements Seriali
                         } else {
                             // since we have new weight value in memory, we should update sWeight value before moving it off memory
                             sWeight += mWeight;
-                
+
                             // original pair can be safely removed from CountMap
                             localMap.removePair(element1,element2);
                         }
-                
+
                         StringBuilder builder = new StringBuilder().append(element1.getIndex()).append(" ").append(element2.getIndex()).append(" ").append(sWeight);
                         pw.println(builder.toString());
                         numberOfLinesSaved++;
                         linesRead++;
-                
+
                    // if (numberOfLinesSaved % 100000 == 0) logger.info("Lines saved: [" + numberOfLinesSaved +"]");
                   //  if (linesRead % 100000 == 0) logger.info("Lines read: [" + linesRead +"]");
                 }
                 */
                 /*
                 logger.info("Lines read: [" + linesRead + "]");
-                
+
                 //now, we can dump the rest of elements, which were not presented in existing dump
                 Iterator<Pair<T, T>> iterator = localMap.getPairIterator();
                 while (iterator.hasNext()) {
                     Pair<T, T> pair = iterator.next();
                     double mWeight = localMap.getCount(pair);
-                
+
                     StringBuilder builder = new StringBuilder().append(pair.getFirst().getIndex()).append(" ").append(pair.getFirst().getIndex()).append(" ").append(mWeight);
                     pw.println(builder.toString());
                     numberOfLinesSaved++;
-                
+
                               //      if (numberOfLinesSaved % 100000 == 0) logger.info("Lines saved: [" + numberOfLinesSaved +"]");
                 }
-                
+
                 pw.flush();
                 pw.close();
-                
+
                 */
 
                 // just a hint for gc

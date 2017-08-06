@@ -1,7 +1,7 @@
 package org.deeplearning4j.iterator.provider;
 
 import lombok.NonNull;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.iterator.LabeledSentenceProvider;
 
 import java.util.*;

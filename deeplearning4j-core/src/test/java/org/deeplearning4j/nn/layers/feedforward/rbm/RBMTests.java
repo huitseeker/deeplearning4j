@@ -18,7 +18,7 @@
 
 package org.deeplearning4j.nn.layers.feedforward.rbm;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.datasets.fetchers.IrisDataFetcher;
 import org.deeplearning4j.datasets.fetchers.MnistDataFetcher;
 import org.deeplearning4j.eval.Evaluation;

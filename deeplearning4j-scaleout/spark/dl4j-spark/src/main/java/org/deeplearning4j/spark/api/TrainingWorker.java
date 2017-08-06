@@ -1,6 +1,6 @@
 package org.deeplearning4j.spark.api;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.nn.graph.ComputationGraph;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.spark.api.stats.SparkTrainingStats;

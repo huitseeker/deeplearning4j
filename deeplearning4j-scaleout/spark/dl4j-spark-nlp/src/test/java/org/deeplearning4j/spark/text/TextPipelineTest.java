@@ -23,8 +23,8 @@ import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.broadcast.Broadcast;
-import org.deeplearning4j.berkeley.Counter;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Counter;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.models.word2vec.Huffman;
 import org.deeplearning4j.models.word2vec.VocabWord;
 import org.deeplearning4j.models.word2vec.wordstore.VocabCache;
@@ -517,4 +517,3 @@ public class TextPipelineTest extends BaseSparkTest {
     }
 
 }
-

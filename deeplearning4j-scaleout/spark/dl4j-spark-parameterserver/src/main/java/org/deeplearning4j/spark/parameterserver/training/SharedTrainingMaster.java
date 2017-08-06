@@ -14,7 +14,8 @@ import org.apache.spark.storage.StorageLevel;
 import org.deeplearning4j.api.storage.Persistable;
 import org.deeplearning4j.api.storage.StatsStorageRouter;
 import org.deeplearning4j.api.storage.StorageMetaData;
-import org.deeplearning4j.berkeley.Pair;
+import
+edu.berkeley.nlp.util.Pair ;
 import org.deeplearning4j.exception.DL4JInvalidConfigException;
 import org.deeplearning4j.optimize.api.IterationListener;
 import org.deeplearning4j.spark.api.*;

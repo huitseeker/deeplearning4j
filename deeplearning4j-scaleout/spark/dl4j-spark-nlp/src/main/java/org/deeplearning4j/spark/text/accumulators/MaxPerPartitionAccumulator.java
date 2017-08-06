@@ -1,7 +1,7 @@
 package org.deeplearning4j.spark.text.accumulators;
 
 import org.apache.spark.AccumulatorParam;
-import org.deeplearning4j.berkeley.Counter;
+import edu.berkeley.nlp.util.Counter;
 
 /**
  * @author jeffreytang

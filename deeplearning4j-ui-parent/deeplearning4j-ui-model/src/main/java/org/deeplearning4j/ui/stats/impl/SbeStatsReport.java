@@ -5,7 +5,7 @@ import org.agrona.DirectBuffer;
 import org.agrona.MutableDirectBuffer;
 import org.agrona.concurrent.UnsafeBuffer;
 import org.apache.commons.io.IOUtils;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.ui.stats.api.StatsType;
 import org.deeplearning4j.ui.stats.api.Histogram;
 import org.deeplearning4j.ui.stats.api.StatsReport;

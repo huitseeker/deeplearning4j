@@ -21,8 +21,8 @@ package org.deeplearning4j.spark.text.functions;
 import org.apache.spark.Accumulator;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.broadcast.Broadcast;
-import org.deeplearning4j.berkeley.Counter;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Counter;
+import edu.berkeley.nlp.util.Pair;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -66,4 +66,3 @@ public class UpdateWordFreqAccumulatorFunction implements Function<List<String>,
         return new Pair<>(lstOfWords, lstOfWordsSize);
     }
 }
-

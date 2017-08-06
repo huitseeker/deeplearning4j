@@ -20,7 +20,7 @@ package org.deeplearning4j.text.movingwindow;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.deeplearning4j.berkeley.StringUtils;
+import edu.berkeley.nlp.util.StringUtils;
 import org.deeplearning4j.models.embeddings.wordvectors.WordVectors;
 import org.deeplearning4j.text.tokenization.tokenizer.DefaultStreamTokenizer;
 import org.deeplearning4j.text.tokenization.tokenizer.Tokenizer;

@@ -40,7 +40,7 @@ import org.apache.commons.compress.compressors.gzip.GzipUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.LineIterator;
 import org.apache.commons.io.output.*;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.models.embeddings.WeightLookupTable;
 import org.deeplearning4j.models.embeddings.inmemory.InMemoryLookupTable;
 import org.deeplearning4j.models.embeddings.reader.impl.BasicModelUtils;
@@ -1360,7 +1360,7 @@ public class WordVectorSerializer {
             Line 0 - VectorsConfiguration JSON string
             Line 1 - expTable
             Line 2 - table
-        
+
             All following lines are vocab/weight lookup table saved line by line as VocabularyWord JSON representation
          */
 

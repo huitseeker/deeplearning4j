@@ -1,7 +1,7 @@
 package org.deeplearning4j.datasets.iterator;
 
 import lombok.NonNull;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 
 /**
  * float[] wrapper for DataSetIterator impementation.

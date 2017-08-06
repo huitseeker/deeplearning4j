@@ -26,7 +26,7 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.broadcast.Broadcast;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.models.embeddings.inmemory.InMemoryLookupTable;
 import org.deeplearning4j.models.embeddings.loader.VectorsConfiguration;
 import org.deeplearning4j.models.embeddings.wordvectors.WordVectorsImpl;
@@ -181,7 +181,7 @@ public class Word2Vec extends WordVectorsImpl<VocabWord> implements Serializable
         // Building Huffman Tree would update the code and point in each of the vocabWord in vocabCache
         /*
         We don't need to build tree here, since it was built earlier, at TextPipeline.buildVocabCache() call.
-        
+
         Huffman huffman = new Huffman(vocabCache.vocabWords());
         huffman.build();
         huffman.applyIndexes(vocabCache);

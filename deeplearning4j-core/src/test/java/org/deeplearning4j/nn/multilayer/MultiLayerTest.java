@@ -18,7 +18,7 @@
 
 package org.deeplearning4j.nn.multilayer;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.datasets.iterator.impl.IrisDataSetIterator;
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
 import org.deeplearning4j.eval.Evaluation;
@@ -458,12 +458,12 @@ public class MultiLayerTest {
 
         /*
         System.out.println(pair);
-        
+
         //Use updater to go from raw gradients -> updates
         //Apply learning rate, gradient clipping, adagrad/momentum/rmsprop etc
         Updater updater = UpdaterCreator.getUpdater(net);
         updater.update(net, g, 0, miniBatch);
-        
+
         StepFunction stepFunction = new NegativeGradientStepFunction();
         INDArray params = net.params();
         System.out.println(Arrays.toString(params.get(NDArrayIndex.all(), NDArrayIndex.interval(0, 10)).dup().data().asFloat()));

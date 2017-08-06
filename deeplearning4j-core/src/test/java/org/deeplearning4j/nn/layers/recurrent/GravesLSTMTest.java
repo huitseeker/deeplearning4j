@@ -1,6 +1,6 @@
 package org.deeplearning4j.nn.layers.recurrent;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
@@ -69,7 +69,7 @@ public class GravesLSTMTest {
     @Test
     public void testLSTMGravesBackwardBasic() {
         //Very basic test of backprop for mini-batch + time series
-        //Essentially make sure it doesn't throw any exceptions, and provides output in the correct shape. 
+        //Essentially make sure it doesn't throw any exceptions, and provides output in the correct shape.
 
         testGravesBackwardBasicHelper(13, 3, 17, 10, 7);
         testGravesBackwardBasicHelper(13, 3, 17, 1, 7); //Edge case: miniBatchSize = 1

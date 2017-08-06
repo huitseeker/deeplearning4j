@@ -18,9 +18,9 @@
 
 package org.deeplearning4j.text.movingwindow;
 
-import org.deeplearning4j.berkeley.Counter;
-import org.deeplearning4j.berkeley.CounterMap;
-import org.deeplearning4j.berkeley.MapFactory;
+import edu.berkeley.nlp.util.Counter;
+import edu.berkeley.nlp.util.CounterMap;
+import edu.berkeley.nlp.util.MapFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -54,17 +54,17 @@ public class Util {
     }
 
 
-    /**
+    /**shipped in violation of the license.
      * Returns a thread safe counter
      * @return
      */
     public static <K> Counter<K> parallelCounter() {
-        MapFactory<K, Float> factory = new MapFactory<K, Float>() {
+        MapFactory<K, Double> factory = new MapFactory<K, Double>() {
 
             private static final long serialVersionUID = 5447027920163740307L;
 
             @Override
-            public Map<K, Float> buildMap() {
+            public Map<K, Double> buildMap() {
                 return new java.util.concurrent.ConcurrentHashMap<>();
             }
 

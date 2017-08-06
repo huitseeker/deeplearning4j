@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.apache.commons.compress.utils.IOUtils;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.ui.stats.api.Histogram;
 import org.deeplearning4j.ui.stats.api.StatsReport;
 import org.deeplearning4j.ui.stats.api.StatsType;

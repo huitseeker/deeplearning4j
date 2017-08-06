@@ -2,7 +2,7 @@ package org.deeplearning4j.spark.api.worker;
 
 import org.datavec.spark.functions.FlatMapFunctionAdapter;
 import org.datavec.spark.transform.BaseFlatMapFunctionAdaptee;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.datasets.iterator.AsyncMultiDataSetIterator;
 import org.deeplearning4j.datasets.iterator.IteratorMultiDataSetIterator;
 import org.deeplearning4j.nn.graph.ComputationGraph;

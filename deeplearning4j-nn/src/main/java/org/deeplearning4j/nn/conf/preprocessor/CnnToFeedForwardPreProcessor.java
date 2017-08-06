@@ -18,7 +18,7 @@
 
 package org.deeplearning4j.nn.conf.preprocessor;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.nn.api.MaskState;
 import org.nd4j.shade.jackson.annotation.JsonCreator;
 import org.nd4j.shade.jackson.annotation.JsonProperty;

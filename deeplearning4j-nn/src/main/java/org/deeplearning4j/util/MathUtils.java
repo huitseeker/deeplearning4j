@@ -24,7 +24,7 @@ import org.apache.commons.math3.linear.NonSquareMatrixException;
 import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.apache.commons.math3.util.FastMath;
-import org.deeplearning4j.berkeley.Counter;
+import edu.berkeley.nlp.util.Counter;
 
 import java.util.ArrayList;
 import java.util.List;

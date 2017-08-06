@@ -22,8 +22,8 @@ import org.apache.spark.Accumulator;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.broadcast.Broadcast;
-import org.deeplearning4j.berkeley.Counter;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Counter;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.models.embeddings.loader.VectorsConfiguration;
 import org.deeplearning4j.models.word2vec.Huffman;
 import org.deeplearning4j.models.word2vec.VocabWord;
@@ -34,7 +34,6 @@ import org.deeplearning4j.spark.text.accumulators.WordFreqAccumulator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -58,7 +57,7 @@ public class TextPipeline {
     private Broadcast<List<String>> stopWordBroadCast;
     // Return values
     private JavaRDD<Pair<List<String>, AtomicLong>> sentenceWordsCountRDD;
-    private VocabCache<VocabWord> vocabCache = new AbstractCache<>();
+    private final VocabCache<VocabWord> vocabCache = new AbstractCache<>();
     private Broadcast<VocabCache<VocabWord>> vocabCacheBroadcast;
     private JavaRDD<List<VocabWord>> vocabWordListRDD;
     private JavaRDD<AtomicLong> sentenceCountRDD;
@@ -72,45 +71,45 @@ public class TextPipeline {
     // Constructor
     public TextPipeline(JavaRDD<String> corpusRDD, Broadcast<Map<String, Object>> broadcasTokenizerVarMap)
                     throws Exception {
-        setRDDVarMap(corpusRDD, broadcasTokenizerVarMap);
+        this.setRDDVarMap(corpusRDD, broadcasTokenizerVarMap);
         // Setup all Spark variables
-        setup();
+        this.setup();
     }
 
     public void setRDDVarMap(JavaRDD<String> corpusRDD, Broadcast<Map<String, Object>> broadcasTokenizerVarMap) {
         Map<String, Object> tokenizerVarMap = broadcasTokenizerVarMap.getValue();
         this.corpusRDD = corpusRDD;
-        this.numWords = (int) tokenizerVarMap.get("numWords");
+        numWords = (int) tokenizerVarMap.get("numWords");
         // TokenizerFunction Settings
-        this.nGrams = (int) tokenizerVarMap.get("nGrams");
-        this.tokenizer = (String) tokenizerVarMap.get("tokenizer");
-        this.tokenizerPreprocessor = (String) tokenizerVarMap.get("tokenPreprocessor");
-        this.useUnk = (boolean) tokenizerVarMap.get("useUnk");
-        this.configuration = (VectorsConfiguration) tokenizerVarMap.get("vectorsConfiguration");
+        nGrams = (int) tokenizerVarMap.get("nGrams");
+        tokenizer = (String) tokenizerVarMap.get("tokenizer");
+        tokenizerPreprocessor = (String) tokenizerVarMap.get("tokenPreprocessor");
+        useUnk = (boolean) tokenizerVarMap.get("useUnk");
+        configuration = (VectorsConfiguration) tokenizerVarMap.get("vectorsConfiguration");
         // Remove Stop words
         // if ((boolean) tokenizerVarMap.get("removeStop")) {
-        stopWords = (List<String>) tokenizerVarMap.get("stopWords");
+        this.stopWords = (List<String>) tokenizerVarMap.get("stopWords");
         //    }
     }
 
     private void setup() {
         // Set up accumulators and broadcast stopwords
-        this.sc = new JavaSparkContext(corpusRDD.context());
-        this.wordFreqAcc = sc.accumulator(new Counter<String>(), new WordFreqAccumulator());
-        this.stopWordBroadCast = sc.broadcast(stopWords);
+        sc = new JavaSparkContext(this.corpusRDD.context());
+        wordFreqAcc = this.sc.accumulator(new Counter<String>(), new WordFreqAccumulator());
+        stopWordBroadCast = this.sc.broadcast(this.stopWords);
     }
 
     public JavaRDD<List<String>> tokenize() {
-        if (corpusRDD == null) {
+        if (this.corpusRDD == null) {
             throw new IllegalStateException("corpusRDD not assigned. Define TextPipeline with corpusRDD assigned.");
         }
-        return corpusRDD.map(new TokenizerFunction(tokenizer, tokenizerPreprocessor, nGrams));
+        return this.corpusRDD.map(new TokenizerFunction(this.tokenizer, this.tokenizerPreprocessor, this.nGrams));
     }
 
     public JavaRDD<Pair<List<String>, AtomicLong>> updateAndReturnAccumulatorVal(JavaRDD<List<String>> tokenizedRDD) {
         // Update the 2 accumulators
         UpdateWordFreqAccumulatorFunction accumulatorClassFunction =
-                        new UpdateWordFreqAccumulatorFunction(stopWordBroadCast, wordFreqAcc);
+                        new UpdateWordFreqAccumulatorFunction(this.stopWordBroadCast, this.wordFreqAcc);
         JavaRDD<Pair<List<String>, AtomicLong>> sentenceWordsCountRDD = tokenizedRDD.map(accumulatorClassFunction);
 
         // Loop through each element to update accumulator. Count does the same job (verified).
@@ -120,14 +119,14 @@ public class TextPipeline {
     }
 
     private String filterMinWord(String stringToken, double tokenCount) {
-        return (tokenCount < numWords) ? configuration.getUNK() : stringToken;
+        return tokenCount < numWords ? this.configuration.getUNK() : stringToken;
     }
 
     private void addTokenToVocabCache(String stringToken, Float tokenCount) {
         // Making string token into actual token if not already an actual token (vocabWord)
         VocabWord actualToken;
-        if (vocabCache.hasToken(stringToken)) {
-            actualToken = vocabCache.tokenFor(stringToken);
+        if (this.vocabCache.hasToken(stringToken)) {
+            actualToken = this.vocabCache.tokenFor(stringToken);
             actualToken.increaseElementFrequency(tokenCount.intValue());
         } else {
             actualToken = new VocabWord(tokenCount, stringToken);
@@ -135,13 +134,13 @@ public class TextPipeline {
 
         // Set the index of the actual token (vocabWord)
         // Put vocabWord into vocabs in InMemoryVocabCache
-        boolean vocabContainsWord = vocabCache.containsWord(stringToken);
+        boolean vocabContainsWord = this.vocabCache.containsWord(stringToken);
         if (!vocabContainsWord) {
-            int idx = vocabCache.numWords();
+            int idx = this.vocabCache.numWords();
 
-            vocabCache.addToken(actualToken);
+            this.vocabCache.addToken(actualToken);
             actualToken.setIndex(idx);
-            vocabCache.putVocabWord(stringToken);
+            this.vocabCache.putVocabWord(stringToken);
         }
     }
 
@@ -152,112 +151,112 @@ public class TextPipeline {
                             "IllegalStateException: wordFreqCounter has nothing. Check accumulator updating");
         }
 
-        for (Entry<String, Float> entry : wordFreq.entrySet()) {
+        for (Map.Entry<String, Double> entry : wordFreq.entrySet()) {
             String stringToken = entry.getKey();
-            Float tokenCount = entry.getValue();
+            Float tokenCount = entry.getValue().floatValue();
 
             // Turn words below min count to UNK
-            stringToken = filterMinWord(stringToken, tokenCount);
-            if (!useUnk && stringToken.equals("UNK")) {
-                // Turn tokens to vocab and add to vocab cache
-            } else
-                addTokenToVocabCache(stringToken, tokenCount);
+            stringToken = this.filterMinWord(stringToken, tokenCount);
+            if (!this.useUnk && stringToken.equals("UNK"));
+            // Turn tokens to vocab and add to vocab cache
+            else
+            this.addTokenToVocabCache(stringToken, tokenCount);
         }
     }
 
     public void buildVocabCache() {
 
         // Tokenize
-        JavaRDD<List<String>> tokenizedRDD = tokenize();
+        JavaRDD<List<String>> tokenizedRDD = this.tokenize();
 
         // Update accumulator values and map to an RDD of sentence counts
-        sentenceWordsCountRDD = updateAndReturnAccumulatorVal(tokenizedRDD).cache();
+        this.sentenceWordsCountRDD = this.updateAndReturnAccumulatorVal(tokenizedRDD).cache();
 
         // Get value from accumulator
-        Counter<String> wordFreqCounter = wordFreqAcc.value();
+        Counter<String> wordFreqCounter = this.wordFreqAcc.value();
 
         // Filter out low count words and add to vocab cache object and feed into LookupCache
-        filterMinWordAddVocab(wordFreqCounter);
+        this.filterMinWordAddVocab(wordFreqCounter);
 
         // huffman tree should be built BEFORE vocab broadcast
-        Huffman huffman = new Huffman(vocabCache.vocabWords());
+        Huffman huffman = new Huffman(this.vocabCache.vocabWords());
         huffman.build();
-        huffman.applyIndexes(vocabCache);
+        huffman.applyIndexes(this.vocabCache);
 
         // At this point the vocab cache is built. Broadcast vocab cache
-        vocabCacheBroadcast = sc.broadcast(vocabCache);
+        this.vocabCacheBroadcast = this.sc.broadcast(this.vocabCache);
 
     }
 
     public void buildVocabWordListRDD() {
 
-        if (sentenceWordsCountRDD == null)
+        if (this.sentenceWordsCountRDD == null)
             throw new IllegalStateException("SentenceWordCountRDD must be defined first. Run buildLookupCache first.");
 
-        vocabWordListRDD = sentenceWordsCountRDD.map(new WordsListToVocabWordsFunction(vocabCacheBroadcast))
+        this.vocabWordListRDD = this.sentenceWordsCountRDD.map(new WordsListToVocabWordsFunction(this.vocabCacheBroadcast))
                         .setName("vocabWordListRDD").cache();
-        sentenceCountRDD =
-                        sentenceWordsCountRDD.map(new GetSentenceCountFunction()).setName("sentenceCountRDD").cache();
+        this.sentenceCountRDD =
+                this.sentenceWordsCountRDD.map(new GetSentenceCountFunction()).setName("sentenceCountRDD").cache();
         // Actions to fill vocabWordListRDD and sentenceCountRDD
-        vocabWordListRDD.count();
-        totalWordCount = sentenceCountRDD.reduce(new ReduceSentenceCount()).get();
+        this.vocabWordListRDD.count();
+        this.totalWordCount = this.sentenceCountRDD.reduce(new ReduceSentenceCount()).get();
 
         // Release sentenceWordsCountRDD from cache
-        sentenceWordsCountRDD.unpersist();
+        this.sentenceWordsCountRDD.unpersist();
     }
 
     // Getters
     public Accumulator<Counter<String>> getWordFreqAcc() {
-        if (wordFreqAcc != null) {
-            return wordFreqAcc;
+        if (this.wordFreqAcc != null) {
+            return this.wordFreqAcc;
         } else {
             throw new IllegalStateException("IllegalStateException: wordFreqAcc not set at TextPipline.");
         }
     }
 
     public Broadcast<VocabCache<VocabWord>> getBroadCastVocabCache() throws IllegalStateException {
-        if (vocabCache.numWords() > 0) {
-            return vocabCacheBroadcast;
+        if (this.vocabCache.numWords() > 0) {
+            return this.vocabCacheBroadcast;
         } else {
             throw new IllegalStateException("IllegalStateException: VocabCache not set at TextPipline.");
         }
     }
 
     public VocabCache<VocabWord> getVocabCache() throws IllegalStateException {
-        if (vocabCache != null && vocabCache.numWords() > 0) {
-            return vocabCache;
+        if (this.vocabCache != null && this.vocabCache.numWords() > 0) {
+            return this.vocabCache;
         } else {
             throw new IllegalStateException("IllegalStateException: VocabCache not set at TextPipline.");
         }
     }
 
     public JavaRDD<Pair<List<String>, AtomicLong>> getSentenceWordsCountRDD() {
-        if (sentenceWordsCountRDD != null) {
-            return sentenceWordsCountRDD;
+        if (this.sentenceWordsCountRDD != null) {
+            return this.sentenceWordsCountRDD;
         } else {
             throw new IllegalStateException("IllegalStateException: sentenceWordsCountRDD not set at TextPipline.");
         }
     }
 
     public JavaRDD<List<VocabWord>> getVocabWordListRDD() throws IllegalStateException {
-        if (vocabWordListRDD != null) {
-            return vocabWordListRDD;
+        if (this.vocabWordListRDD != null) {
+            return this.vocabWordListRDD;
         } else {
             throw new IllegalStateException("IllegalStateException: vocabWordListRDD not set at TextPipline.");
         }
     }
 
     public JavaRDD<AtomicLong> getSentenceCountRDD() throws IllegalStateException {
-        if (sentenceCountRDD != null) {
-            return sentenceCountRDD;
+        if (this.sentenceCountRDD != null) {
+            return this.sentenceCountRDD;
         } else {
             throw new IllegalStateException("IllegalStateException: sentenceCountRDD not set at TextPipline.");
         }
     }
 
     public Long getTotalWordCount() {
-        if (totalWordCount != 0L) {
-            return totalWordCount;
+        if (this.totalWordCount != 0L) {
+            return this.totalWordCount;
         } else {
             throw new IllegalStateException("IllegalStateException: totalWordCount not set at TextPipline.");
         }

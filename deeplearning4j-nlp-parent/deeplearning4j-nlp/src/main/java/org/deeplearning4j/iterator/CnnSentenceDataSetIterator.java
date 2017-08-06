@@ -2,7 +2,7 @@ package org.deeplearning4j.iterator;
 
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.iterator.provider.LabelAwareConverter;
 import org.deeplearning4j.models.embeddings.wordvectors.WordVectors;
 import org.deeplearning4j.text.documentiterator.LabelAwareDocumentIterator;

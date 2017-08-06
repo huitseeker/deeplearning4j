@@ -1,6 +1,6 @@
 package org.deeplearning4j.models.embeddings.reader.impl;
 
-import org.deeplearning4j.berkeley.Counter;
+import edu.berkeley.nlp.util.Counter;
 import org.deeplearning4j.models.sequencevectors.sequence.SequenceElement;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.ops.transforms.Transforms;

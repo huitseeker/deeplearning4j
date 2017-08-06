@@ -20,7 +20,7 @@ package org.deeplearning4j.nn.graph.vertex.impl;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.nn.api.Layer;
 import org.deeplearning4j.nn.api.MaskState;
 import org.deeplearning4j.nn.api.layers.IOutputLayer;

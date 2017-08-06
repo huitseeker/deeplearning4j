@@ -17,7 +17,7 @@
  */
 package org.deeplearning4j.nn.layers.recurrent;
 
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.nn.api.Layer;
 import org.deeplearning4j.nn.api.MaskState;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;

@@ -19,7 +19,7 @@
 package org.deeplearning4j.spark.models.embeddings.glove;
 
 import org.apache.spark.api.java.function.Function;
-import org.deeplearning4j.berkeley.Triple;
+import edu.berkeley.nlp.util.Triple;
 import org.deeplearning4j.models.glove.GloveWeightLookupTable;
 import org.deeplearning4j.models.word2vec.VocabWord;
 

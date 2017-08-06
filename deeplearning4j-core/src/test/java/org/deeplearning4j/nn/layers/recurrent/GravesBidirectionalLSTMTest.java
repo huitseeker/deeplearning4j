@@ -1,7 +1,7 @@
 package org.deeplearning4j.nn.layers.recurrent;
 
 import junit.framework.TestCase;
-import org.deeplearning4j.berkeley.Pair;
+import edu.berkeley.nlp.util.Pair;
 import org.deeplearning4j.eval.Evaluation;
 import org.deeplearning4j.nn.api.Model;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
